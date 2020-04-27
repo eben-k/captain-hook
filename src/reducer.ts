@@ -1,12 +1,15 @@
 import { SEARCH_MOVIES_REQUEST, SEARCH_MOVIES_SUCCESS, SEARCH_MOVIES_FAILURE } from "./utils/utils";
 
-const reducer = (state, action) => {
+type AppState = { movies: [], loading: boolean, errorMessage: string };
+type Action = | { type: "SEARCH_MOVIES_SUCCESS", payload: [] } | { type: "SEARCH_MOVIES_FAILURE", error: string } | { type: "SEARCH_MOVIES_REQUEST"}
+
+export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case SEARCH_MOVIES_REQUEST:
       return {
         ...state,
         loading: true,
-        errorMessage: null,
+        errorMessage: '',
       };
     case SEARCH_MOVIES_SUCCESS:
       return {
@@ -25,5 +28,3 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
-export default reducer;

@@ -1,9 +1,9 @@
-import React, { useReducer, useEffect } from "react";
+import { useReducer, useEffect } from "react";
 import Header from "./Header";
 import Movie from "./Movie";
 import Search from "./Search";
 import "../App.css";
-import reducer from "../reducer";
+import { reducer } from "../reducer";
 import {
   initialState,
   MOVIE_API_URL,
@@ -12,6 +12,7 @@ import {
   SEARCH_MOVIES_REQUEST,
   SEARCH_MOVIES_FAILURE,
 } from "../utils/utils";
+import React from "react";
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -27,7 +28,7 @@ const App = () => {
       });
   }, []);
 
-  const search = (searchTerm) => {
+  const search = (searchTerm: string) => {
     dispatch({
       type: SEARCH_MOVIES_REQUEST,
     });
@@ -62,7 +63,7 @@ const App = () => {
           <div className="errorMessage">{errorMessage}</div>
         ) : (
           movies.map((movie, index) => (
-            <Movie key={`${index}-${movie.Title}`} movie={movie} />
+            <Movie key={`${index}`} movie={movie} />
           ))
         )}
       </div>
