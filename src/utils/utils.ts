@@ -3,13 +3,15 @@ export const DEFAULT_PLACEHOLDER_IMAGE =
 
 export const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=4a3b711b";
 
+type MovieArray = [];
+
 export const initialState = {
-  loaing: true,
-  movies: [],
-  errorMessage: null,
+  loading: true,
+  movies: [] as MovieArray,
+  errorMessage: '' as string,
 };
 
-export const baseURL = (searchTerm) =>
+export const baseURL = (searchTerm: string) =>
   `https://www.omdbapi.com/?s=${searchTerm}&apikey=4a3b711b`;
 
 export const SEARCH_MOVIES_REQUEST = 'SEARCH_MOVIES_REQUEST';

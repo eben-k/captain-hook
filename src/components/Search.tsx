@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 
-const Search = (props) => {
+type SearchProps = { search: Function };
+
+const Search = ({search}: SearchProps) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const onSearchInputChange = (event) => setSearchTerm(event.target.value);
+  const onSearchInputChange = (event: React.FormEvent<HTMLInputElement>) => setSearchTerm(event.currentTarget.value);
 
   const resetSearchInput = () => setSearchTerm("");
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    props.search(searchTerm);
+    search(searchTerm);
     resetSearchInput();
   };
 
