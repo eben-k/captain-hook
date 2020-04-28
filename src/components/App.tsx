@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import React,{ useReducer, useEffect } from "react";
 import Header from "./Header";
 import Movie from "./Movie";
 import Search from "./Search";
@@ -12,7 +12,6 @@ import {
   SEARCH_MOVIES_REQUEST,
   SEARCH_MOVIES_FAILURE,
 } from "../utils/utils";
-import React from "react";
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
