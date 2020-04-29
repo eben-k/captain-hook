@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import React,{ useReducer, useEffect } from "react";
 import Header from "./Header";
 import Movie from "./Movie";
 import Search from "./Search";
@@ -12,7 +12,16 @@ import {
   SEARCH_MOVIES_REQUEST,
   SEARCH_MOVIES_FAILURE,
 } from "../utils/utils";
-import React from "react";
+
+type JsonResponse = {
+  Search: [{
+    Title: string,
+    Year: string,
+    Poster: string,
+  }],
+  Response: string,
+  Error: string
+}
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -20,7 +29,7 @@ const App = () => {
   useEffect(() => {
     fetch(MOVIE_API_URL)
       .then((response) => response.json())
-      .then((jsonResponse) => {
+      .then((jsonResponse: JsonResponse) => {
         dispatch({
           type: SEARCH_MOVIES_SUCCESS,
           payload: jsonResponse.Search,
@@ -34,8 +43,8 @@ const App = () => {
     });
     fetch(baseURL(searchTerm))
       .then((response) => response.json())
-      .then((jsonResponse) => {
-        if (jsonResponse === "True") {
+      .then((jsonResponse: JsonResponse) => {
+        if (jsonResponse.Response === "True") {
           dispatch({
             type: SEARCH_MOVIES_SUCCESS,
             payload: jsonResponse.Search,
@@ -63,7 +72,7 @@ const App = () => {
           <div className="errorMessage">{errorMessage}</div>
         ) : (
           movies.map((movie, index) => (
-            <Movie key={`${index}`} movie={movie} />
+            <Movie key={`${index}-${movie.Title}`} movie={movie} />
           ))
         )}
       </div>
