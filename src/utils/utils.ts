@@ -3,11 +3,18 @@ export const DEFAULT_PLACEHOLDER_IMAGE =
 
 export const MOVIE_API_URL = "https://www.omdbapi.com/?s=world&apikey=3f561479";
 
-type MovieArray = [];
+type JsonResponse = {
+  Search: [{
+    Title: string,
+    Year: string,
+    Poster: string,
+  }],
+  Response: string
+}
 
 export const initialState = {
   loading: true,
-  movies: [] as MovieArray,
+  movies: [] as unknown as JsonResponse["Search"],
   errorMessage: '' as string,
 };
 
